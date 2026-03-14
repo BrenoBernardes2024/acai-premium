@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://meu-5-zvr8.vercel.app/ -->
+<html lang="pt-BR"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Açaí Premium - O Melhor Açaí da Cidade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./css2" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./modal.css">
+    <link rel="stylesheet" href="./configurator.css">
+    <link rel="stylesheet" href="./responsive.css">
+    <link rel="stylesheet" href="./all.min.css">
+<style>
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+</style></head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="https://meu-5-zvr8.vercel.app/index.html" class="logo">
+                <i class="fas fa-ice-cream"></i>
+                <span>Açaí Premium</span>
+            </a>
+            <div class="nav-links">
+                <a href="https://meu-5-zvr8.vercel.app/#cardapio">Cardápio</a>
+                <a href="https://meu-5-zvr8.vercel.app/#montar">Montar Açaí</a>
+                <a href="https://meu-5-zvr8.vercel.app/#galeria">Galeria</a>
+                <a href="https://meu-5-zvr8.vercel.app/#depoimentos">Depoimentos</a>
+                <a href="https://meu-5-zvr8.vercel.app/#sobre">Sobre</a>
+                <a href="https://meu-5-zvr8.vercel.app/#contato">Contato</a>
+            </div>
+            <div class="nav-actions">
+                <button class="cart-btn" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <a href="https://meu-5-zvr8.vercel.app/cadastro.html" class="btn-primary">Login</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <canvas id="hero-canvas" class="hero-video"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">Açaí <span>Premium</span></h1>
+            <p class="hero-subtitle" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">O açaí mais saboroso da cidade, fresquinho e feito com carinho para você</p>
+            <div class="hero-buttons" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <button class="btn-primary btn-large" onclick="scrollToSection('montar')">
+                    <i class="fas fa-plus"></i> Fazer Pedido
+                </button>
+                <button class="btn-secondary btn-large" onclick="scrollToSection('cardapio')">
+                    <i class="fas fa-utensils"></i> Ver Cardápio
+                </button>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Role para baixo</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Cardápio Section -->
+    <section class="menu-section" id="cardapio">
+        <div class="container">
+            <div class="section-header" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <h2 class="section-title">Nosso <span>Cardápio</span></h2>
+                <p class="section-subtitle">Deliciosas opções de açaí para todos os gostos</p>
+            </div>
+            
+            <div class="menu-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="copos">Copos</button>
+                <button class="filter-btn" data-filter="combos">Combos</button>
+                <button class="filter-btn" data-filter="bowls">Bowls</button>
+                <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+                <button class="filter-btn" data-filter="zero">Zero Açúcar</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+        <div class="menu-item" style="animation-delay: 0s">
+            <div class="menu-item-image">
+                <img src="./a5cc6bc77c5d554e80620d77271a94c0.jpg" alt="Açaí 300ml">
+                
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Açaí 300ml</h3>
+                <p class="menu-item-description">Porção individual perfeita para matar a fome</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 12,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Açaí 300ml - R$ 12,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.1s">
+            <div class="menu-item-image">
+                <img src="./5152a2d0d8be8ecca3661eb346e62a04.jpg" alt="Açaí 500ml">
+                
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Açaí 500ml</h3>
+                <p class="menu-item-description">O tamanho mais pedido, com bastante espaço para coberturas</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 18,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Açaí 500ml - R$ 18,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.2s">
+            <div class="menu-item-image">
+                <img src="./3a0a9a5fd33e7885cc4a1d505ae41818.jpg" alt="Açaí 700ml">
+                <span class="menu-item-badge ">Mais Vendido</span>
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Açaí 700ml</h3>
+                <p class="menu-item-description">Para quem quer muito açaí e coberturas</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 25,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Açaí 700ml - R$ 25,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.30000000000000004s">
+            <div class="menu-item-image">
+                <img src="./757f9567e0a94b9726a4c8edfee025b0.jpg" alt="Açaí Zero 500ml">
+                <span class="menu-item-badge zero">Zero Açúcar</span>
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Açaí Zero 500ml</h3>
+                <p class="menu-item-description">Açaí sem açúcar adicionado e com bananas </p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 20,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Açaí Zero 500ml - R$ 20,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.4s">
+            <div class="menu-item-image">
+                <img src="./cca38f4b12db664c250bf25a3112b2c2.jpg" alt="Combo Açaí">
+                <span class="menu-item-badge ">Combo</span>
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Combo Açaí</h3>
+                <p class="menu-item-description">Açaí 500ml + mais um que sai de graça  + bônus de cobertura</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 22,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Combo Açaí - R$ 22,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.5s">
+            <div class="menu-item-image">
+                <img src="./images" alt="Combo Família 1L">
+                <span class="menu-item-badge ">Família</span>
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Combo Família 1L</h3>
+                <p class="menu-item-description">Perfeito para compartilhar em família ou com amigos</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 45,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Combo Família 1L - R$ 45,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.6000000000000001s">
+            <div class="menu-item-image">
+                <img src="./b3e0a5678eccd90997a85adb6bbcbbfc.jpg" alt="Açaí na Tigela">
+                <span class="menu-item-badge ">Premium</span>
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Açaí na Tigela</h3>
+                <p class="menu-item-description">A experiência completa com frutas e granola</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 28,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Açaí na Tigela - R$ 28,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.7000000000000001s">
+            <div class="menu-item-image">
+                <img src="./c64de099c26da30db2ef3d52676650da.jpg" alt="Açaí com Frutas">
+                
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Açaí com Frutas</h3>
+                <p class="menu-item-description">Açaí cremoso acompanhado de frutas frescas selecionadas e com granola crocante</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 26,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Açaí com Frutas - R$ 26,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.8s">
+            <div class="menu-item-image">
+                <img src="./images(1)" alt="Açaí com Granola">
+                
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Açaí com Granola</h3>
+                <p class="menu-item-description">Açaí com granola crocante e banana e mel </p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 24,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Açaí com Granola - R$ 24,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="menu-item" style="animation-delay: 0.9s">
+            <div class="menu-item-image">
+                <img src="./photo-1577805947697-89e18249d767" alt="Smoothie de Açaí">
+                
+            </div>
+            <div class="menu-item-content">
+                <h3 class="menu-item-title">Smoothie de Açaí</h3>
+                <p class="menu-item-description">Bebida gelada e refrescante com açaí</p>
+                <div class="menu-item-footer">
+                    <span class="menu-item-price">R$ 15,00</span>
+                    <button class="menu-item-btn" onclick="openRegisterModal('Smoothie de Açaí - R$ 15,00')">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Configurador Section -->
+    <section class="configurator-section" id="montar">
+        <div class="container">
+            <div class="section-header" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <h2 class="section-title">Monte Seu <span>Açaí</span></h2>
+                <p class="section-subtitle">Personalize do seu jeito, do tamanho às coberturas</p>
+            </div>
+
+            <div class="configurator-wrapper">
+                <!-- Preview do Açaí -->
+                <div class="acai-preview">
+                    <div class="cup-container">
+                        <div class="cup" id="cupPreview" style="height: 140px;">
+                            <div class="cup-content">
+                                <div class="acai-base" id="acaiBase"></div>
+                                <div class="coatings" id="coatingsPreview"></div>
+                            </div>
+                            <div class="cup-top"></div>
+                            <div class="cup-bottom"></div>
+                        </div>
+                        <div class="cup-shadow"></div>
+                    </div>
+                    <div class="preview-info">
+                        <h3 id="previewSize">300ml</h3>
+                        <p id="previewFlavor">Tradicional</p>
+                    </div>
+                </div>
+
+                <!-- Opções do Configurador -->
+                <div class="configurator-options">
+                    <!-- Tamanhos -->
+                    <div class="option-group">
+                        <h4 class="option-title">Escolha o Tamanho</h4>
+                        <div class="size-options">
+                            <button class="size-btn active" data-size="300" data-price="12">
+                                <span class="size-ml">300ml</span>
+                                <span class="size-price">R$ 12,00</span>
+                            </button>
+                            <button class="size-btn" data-size="500" data-price="18">
+                                <span class="size-ml">500ml</span>
+                                <span class="size-price">R$ 18,00</span>
+                            </button>
+                            <button class="size-btn" data-size="700" data-price="25">
+                                <span class="size-ml">700ml</span>
+                                <span class="size-price">R$ 25,00</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sabores -->
+                    <div class="option-group">
+                        <h4 class="option-title">Escolha o Sabor</h4>
+                        <div class="flavor-options">
+                            <button class="flavor-btn active" data-flavor="tradicional" data-color="#4B0082">
+                                <i class="fas fa-ice-cream"></i>
+                                <span>Tradicional</span>
+                            </button>
+                            <button class="flavor-btn" data-flavor="guarana" data-color="#6B238E">
+                                <i class="fas fa-leaf"></i>
+                                <span>Guaraná</span>
+                            </button>
+                            <button class="flavor-btn" data-flavor="zero" data-color="#8B00FF">
+                                <i class="fas fa-bolt"></i>
+                                <span>Zero</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coberturas - Frutas -->
+                    <div class="option-group">
+                        <h4 class="option-title">
+                            <i class="fas fa-apple-alt"></i> Frutas
+                            <span class="limit-info" id="fruitLimit">0/3</span>
+                        </h4>
+                        <div class="coating-options fruits">
+                            <button class="coating-btn" data-type="fruit" data-name="Banana" data-price="2">
+                                <i class="fas fa-lemon"></i> Banana
+                            </button>
+                            <button class="coating-btn" data-type="fruit" data-name="Morango" data-price="2">
+                                <i class="fas fa-heart"></i> Morango
+                            </button>
+                            <button class="coating-btn" data-type="fruit" data-name="Kiwi" data-price="3">
+                                <i class="fas fa-leaf"></i> Kiwi
+                            </button>
+                            <button class="coating-btn" data-type="fruit" data-name="Abacaxi" data-price="2">
+                                <i class="fas fa-lemon"></i> Abacaxi
+                            </button>
+                            <button class="coating-btn" data-type="fruit" data-name="Uva" data-price="2">
+                                <i class="fas fa-wine-glass"></i> Uva
+                            </button>
+                            <button class="coating-btn" data-type="fruit" data-name="Manga" data-price="2">
+                                <i class="fas fa-sun"></i> Manga
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coberturas - Granolas -->
+                    <div class="option-group">
+                        <h4 class="option-title">
+                            <i class="fas fa-cookie"></i> Granolas
+                            <span class="limit-info" id="granolaLimit">0/2</span>
+                        </h4>
+                        <div class="coating-options granolas">
+                            <button class="coating-btn" data-type="granola" data-name="Tradicional" data-price="3">
+                                <i class="fas fa-bars"></i> Tradicional
+                            </button>
+                            <button class="coating-btn" data-type="granola" data-name="Crocante" data-price="4">
+                                <i class="fas fa-bread-slice"></i> Crocante
+                            </button>
+                            <button class="coating-btn" data-type="granola" data-name="Leite em Pó" data-price="3">
+                                <i class="fas fa-glass-whiskey"></i> Leite em Pó
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coberturas - Caldas -->
+                    <div class="option-group">
+                        <h4 class="option-title">
+                            <i class="fas fa-tint"></i> Caldas
+                            <span class="limit-info" id="syrupLimit">0/2</span>
+                        </h4>
+                        <div class="coating-options syrups">
+                            <button class="coating-btn" data-type="syrup" data-name="Leite Condensado" data-price="3">
+                                <i class="fas fa-blender"></i> Leite Condensado
+                            </button>
+                            <button class="coating-btn" data-type="syrup" data-name="Chocolate" data-price="3">
+                                <i class="fas fa-coffee"></i> Chocolate
+                            </button>
+                            <button class="coating-btn" data-type="syrup" data-name="Morango" data-price="3">
+                                <i class="fas fa-heart"></i> Morango
+                            </button>
+                            <button class="coating-btn" data-type="syrup" data-name="Caramelo" data-price="3">
+                                <i class="fas fa-fire"></i> Caramelo
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coberturas - Complementos -->
+                    <div class="option-group">
+                        <h4 class="option-title">
+                            <i class="fas fa-plus-circle"></i> Complementos
+                            <span class="limit-info" id="complementLimit">0/4</span>
+                        </h4>
+                        <div class="coating-options complements">
+                            <button class="coating-btn" data-type="complement" data-name="Paçoca" data-price="2">
+                                <i class="fas fa-cookie"></i> Paçoca
+                            </button>
+                            <button class="coating-btn" data-type="complement" data-name="Farinha Láctea" data-price="3">
+                                <i class="fas fa-snowflake"></i> Farinha Láctea
+                            </button>
+                            <button class="coating-btn" data-type="complement" data-name="Coco Ralado" data-price="2">
+                                <i class="fas fa-dot-circle"></i> Coco Ralado
+                            </button>
+                            <button class="coating-btn" data-type="complement" data-name="Chocoball" data-price="3">
+                                <i class="fas fa-circle"></i> Chocoball
+                            </button>
+                            <button class="coating-btn" data-type="complement" data-name="Nutella" data-price="5">
+                                <i class="fas fa-hazel-nut"></i> Nutella
+                            </button>
+                            <button class="coating-btn" data-type="complement" data-name="Amendoim" data-price="2">
+                                <i class="fas fa-peanut"></i> Amendoim
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumo e Adicionar ao Carrinho -->
+                <div class="configurator-summary">
+                    <div class="summary-header">
+                        <h3>Seu Açaí</h3>
+                        <div class="total-price">
+                            <span class="price-label">Total:</span>
+                            <span class="price-value" id="totalPrice">R$ 12,00</span>
+                        </div>
+                    </div>
+                    <div class="summary-details">
+                        <div class="summary-item">
+                            <span>Tamanho:</span>
+                            <span id="summarySize">300ml</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Sabor:</span>
+                            <span id="summaryFlavor">Tradicional</span>
+                        </div>
+                        <div class="summary-coatings" id="summaryCoatings">
+                            <span>Coberturas:</span>
+                            <div class="coatings-list" id="coatingsList"><span class="coating-tag">Nenhuma cobertura selecionada</span></div>
+                        </div>
+                    </div>
+                    <button class="btn-primary btn-add-cart" id="addToCartBtn">
+                        <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Section -->
+    <section class="gallery-section" id="galeria">
+        <div class="container">
+            <div class="section-header" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <h2 class="section-title">Nossa <span>Galeria</span></h2>
+                <p class="section-subtitle">Algumas fotos dos nossos açaís mais pedidos</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item gallery-item-1">
+                    <img src="./3a0a9a5fd33e7885cc4a1d505ae41818.jpg" alt="Açaí Premium">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-ice-cream"></i>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-item-2">
+                    <img src="./c64de099c26da30db2ef3d52676650da.jpg" alt="Açaí com Frutas">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-apple-alt"></i>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-item-3">
+                    <img src="./b3e0a5678eccd90997a85adb6bbcbbfc.jpg" alt="Açaí na Tigela">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-bowl-food"></i>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-item-4">
+                    <img src="./photo-1563805042-7684c019e1cb" alt="Açaí com Nutella">
+                    <img src="https://meu-5-zvr8.vercel.app/" alt="Açaí com Nutella">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-chocolate"></i>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-item-5">
+                    <img src="./images(1)" alt="Açaí com Granola">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-cookie"></i>
+                    </div>
+                </div>
+                <div class="gallery-item gallery-item-6">
+                    <img src="./photo-1577805947697-89e18249d767" alt="Smoothie de Açaí">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-blender"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos Section -->
+    <section class="testimonials-section" id="depoimentos">
+        <div class="container">
+            <div class="section-header" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <h2 class="section-title">O que dizem <span>Nossos Clientes</span></h2>
+                <p class="section-subtitle">A satisfação dos nossos clientes é o nosso maior prêmio</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"O melhor açaí que já provei! A cobertura de Nutella é divine e o atendimento é excelente!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>Mariana Silva</h4>
+                            <span>Cliente fiel há 2 anos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Adoro montar meu próprio açaí! O configurador é super fácil de usar e sempre fica perfeito."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">J</div>
+                        <div class="author-info">
+                            <h4>João Pedro</h4>
+                            <span>Cliente há 1 ano</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"A opção zero açúcar é uma benção! Consumo todos os dias sem culpa. Delícia pura!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <h4>Carolina Santos</h4>
+                            <span>Cliente fitness</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section class="about-section" id="sobre">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <div class="section-header section-header-left" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                        <h2 class="section-title">Sobre o <span>Açaí Premium</span></h2>
+                        <p class="section-subtitle">Uma história de sabor e qualidade</p>
+                    </div>
+                    <p class="about-text">
+                        Há mais de 10 anos, levamos o melhor açaí da região até você. 
+                        Tudo começa com a seleção rigorosa dos melhores frutos da Amazônia, 
+                        processados de forma artesanal para manter todo o sabor e nutrientes.
+                    </p>
+                    <p class="about-text">
+                        Nosso compromisso é com a qualidade: usamos apenas ingredientes naturais, 
+                        frutas frescas e coberturas premium. Cada açaí é preparado com carinho 
+                        para garantir a melhor experiência possível.
+                    </p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-leaf"></i>
+                            <span>100% Natural</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Feito com Amor</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-award"></i>
+                            <span>Qualidade Premium</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Entrega Rápida</span>
+                        </div>
+                    </div>
+                    <a href="https://meu-5-zvr8.vercel.app/sobre.html" class="btn-secondary">
+                        <i class="fas fa-arrow-right"></i>Saiba Mais
+                    </a>
+                </div>
+                <div class="about-image">
+                    <img src="./photo-1563805042-7684c019e1cb(1)" alt="Açaí Premium">
+                    <div class="about-image-accent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section class="contact-section" id="contato">
+        <div class="container">
+            <div class="section-header" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                <h2 class="section-title">Fale <span>Conosco</span></h2>
+                <p class="section-subtitle">Estamos prontos para atender você</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Endereço</h4>
+                            <p>Rua do Açaí, 123 - Centro<br>São Paulo - SP</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telefone</h4>
+                            <p>(11) 99999-9999</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Horários</h4>
+                            <p>Seg a Sáb: 10h às 22h<br>Dom: 12h às 20h</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>WhatsApp</h4>
+                            <p>(11) 99999-9999</p>
+                            <a href="https://wa.me/5511999999999" class="btn-whatsapp">
+                                <i class="fab fa-whatsapp"></i> Enviar Mensagem
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <iframe src="./embed.html" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="https://meu-5-zvr8.vercel.app/index.html" class="logo">
+                        <i class="fas fa-ice-cream"></i>
+                        <span>Açaí Premium</span>
+                    </a>
+                    <p>O melhor açaí da cidade, feito com carinho e ingredientes selecionados.</p>
+                    <div class="social-links">
+                        <a href="https://meu-5-zvr8.vercel.app/#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://meu-5-zvr8.vercel.app/#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://meu-5-zvr8.vercel.app/#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://meu-5-zvr8.vercel.app/#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="https://meu-5-zvr8.vercel.app/#cardapio">Cardápio</a></li>
+                        <li><a href="https://meu-5-zvr8.vercel.app/#montar">Montar Açaí</a></li>
+                        <li><a href="https://meu-5-zvr8.vercel.app/#galeria">Galeria</a></li>
+                        <li><a href="https://meu-5-zvr8.vercel.app/#sobre">Sobre Nós</a></li>
+                        <li><a href="https://meu-5-zvr8.vercel.app/#contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Horário de Funcionamento</h4>
+                    <ul>
+                        <li>Segunda a Sábado: 10h às 22h</li>
+                        <li>Domingo: 12h às 20h</li>
+                        <li>Feriados: Consulte</li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Receba Nossas Ofertas</h4>
+                    <p>Cadastre-se e receba promoções exclusivas!</p>
+                    <form class="newsletter-form" onsubmit="return false;">
+                        <input type="email" placeholder="Seu melhor e-mail">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Açaí Premium. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Cadastro -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal-container">
+            <button class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-header">
+                <h3>Finalizar Pedido</h3>
+                <p>Preencha seus dados para continuar</p>
+            </div>
+            <div class="modal-tabs">
+                <button class="modal-tab active" data-tab="register">
+                    <i class="fas fa-user-plus"></i> Criar Conta
+                </button>
+                <button class="modal-tab" data-tab="login">
+                    <i class="fas fa-sign-in-alt"></i> Já Tenho Cadastro
+                </button>
+            </div>
+            <form class="modal-form" id="registerForm">
+                <!-- Informações do Produto -->
+                <div class="product-info">
+                    <div class="product-badge">
+                        <i class="fas fa-ice-cream"></i>
+                        <span id="modalProductName">Açaí 300ml</span>
+                    </div>
+                    <div class="product-details" id="modalProductDetails">
+                        <!-- Detalhes do produto serão inseridos via JS -->
+                    </div>
+                </div>
+
+                <!-- Campos do Formulário -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo *</label>
+                        <input type="text" id="nome" name="nome" required="">
+                        <span class="error-message" id="nomeError"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email" id="email" name="email" required="">
+                        <span class="error-message" id="emailError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone *</label>
+                        <input type="tel" id="telefone" name="telefone" required="">
+                        <span class="error-message" id="telefoneError"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cpf">CPF *</label>
+                        <input type="text" id="cpf" name="cpf" required="">
+                        <span class="error-message" id="cpfError"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cep">CEP *</label>
+                        <input type="text" id="cep" name="cep" required="">
+                        <span class="error-message" id="cepError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="endereco">Endereço *</label>
+                        <input type="text" id="endereco" name="endereco" required="">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="numero">Número *</label>
+                        <input type="text" id="numero" name="numero" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" id="complemento" name="complemento">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bairro">Bairro *</label>
+                        <input type="text" id="bairro" name="bairro" required="">
+                    </div>
+                </div>
+                <div class="form-row" id="passwordField">
+                    <div class="form-group">
+                        <label for="senha">Senha *</label>
+                        <input type="password" id="senha" name="senha" required="">
+                        <span class="error-message" id="senhaError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmarSenha">Confirmar Senha *</label>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" required="">
+                        <span class="error-message" id="confirmarSenhaError"></span>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary btn-full">
+                        <i class="fas fa-check"></i> Confirmar Pedido
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Carrinho Slide -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Seu Carrinho</h3>
+            <button class="cart-close" id="cartClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-basket"></i>
+                <h3>Carrinho Vazio</h3>
+                <p>Adicione alguns açaís deliciosos!</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">R$ 0,00</span>
+            </div>
+            <button class="btn-primary btn-full" id="checkoutBtn">
+                <i class="fas fa-credit-card"></i> Finalizar Pedido
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./gsap.min.js.download" defer></script>
+    <script src="./ScrollTrigger.min.js" defer></script>
+    <script src="./main.js.download" defer></script><div class="cart-overlay"></div>
+    <script src="./modal.js.download" defer></script>
+    <script src="./configurator.js.download" defer></script>
+    <script src="./validation.js.download" defer></script>
+    <script src="./cart.js.download" defer></script>
+
+
+
+<div class="glasp-extension-toaster" style="display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 9999;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div></body><div class="glasp-extension" style="display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

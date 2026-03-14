@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Açaí - Design System</title>
+    <!-- Google Fonts import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variaveis & Tokens */
+        :root {
+            /* Cores */
+            --color-primary-dark: #3a1c42;
+            --color-primary: #522b5d;
+            --color-primary-light: #7a4687;
+            
+            --color-secondary: #a3cc2e;
+            --color-secondary-light: #cde439;
+            --color-secondary-dark: #82a818;
+            
+            --color-accent: #e63946;
+            --color-accent-dark: #cc2531;
+            
+            --color-social-fb: #4267B2;
+            
+            --color-text-light: #ffffff;
+            --color-text-dark: #2d1a33;
+            --color-text-muted: rgba(255, 255, 255, 0.7);
+
+            /* Tipografia */
+            --font-family-display: 'Caveat', cursive;
+            --font-family-body: 'Nunito', sans-serif;
+            
+            --font-size-h1: 3.5rem;
+            --font-size-h2: 2.5rem;
+            --font-size-h3: 1.75rem;
+            --font-size-body: 1rem;
+            --font-size-small: 0.85rem;
+            
+            --font-weight-regular: 400;
+            --font-weight-bold: 700;
+            --font-weight-black: 900;
+            
+            /* Bordas */
+            --border-radius-pill: 50px;
+            --border-radius-circle: 50%;
+            --border-radius-card: 16px;
+            
+            /* Sombras */
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 20px 30px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 25px rgba(163, 204, 46, 0.7);
+        }
+
+        /* Resets & Globals */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-body);
+            background-color: var(--color-primary-dark);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Layout (Sidebar + Main) */
+        .sidebar {
+            width: 280px;
+            background: rgba(82, 43, 93, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+
+        .sidebar-brand h1 {
+            font-family: var(--font-family-display);
+            font-size: var(--font-size-h2);
+            color: var(--color-secondary);
+            margin-bottom: 0.5rem;
+            text-shadow: var(--shadow-sm);
+        }
+
+        .sidebar-brand p {
+            font-size: var(--font-size-small);
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            font-weight: var(--font-weight-bold);
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: var(--color-primary-light);
+            color: var(--color-secondary-light);
+            transform: translateX(5px);
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 3rem 4rem;
+            background: radial-gradient(circle at top right, var(--color-primary), var(--color-primary-dark));
+        }
+
+        /* Componentes de Documentação */
+        .ds-section {
+            margin-bottom: 5rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ds-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(163, 204, 46, 0.2);
+        }
+
+        .ds-header h2 {
+            font-family: var(--font-family-display);
+            font-size: var(--font-size-h1);
+            color: var(--color-secondary-light);
+            text-shadow: var(--shadow-sm);
+        }
+
+        .ds-header p {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Cores */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+
+        .color-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-card);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .color-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .color-swatch {
+            height: 120px;
+            width: 100%;
+        }
+
+        .color-info {
+            padding: 1.5rem;
+        }
+
+        .color-info h4 {
+            margin-bottom: 0.5rem;
+            font-size: var(--font-size-body);
+        }
+
+        .color-info p {
+            font-size: var(--font-size-small);
+            font-family: monospace;
+            color: var(--color-text-muted);
+        }
+
+        /* Tipografia */
+        .typography-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-card);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .type-display {
+            font-family: var(--font-family-display);
+            margin-bottom: 1rem;
+            color: var(--color-secondary-light);
+        }
+        
+        .type-body {
+            font-family: var(--font-family-body);
+            margin-bottom: 1rem;
+        }
+
+        /* Botões */
+        .btn-grid {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 2rem;
+            font-family: var(--font-family-body);
+            font-weight: var(--font-weight-black);
+            font-size: 1.1rem;
+            border-radius: var(--border-radius-pill);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            box-shadow: var(--shadow-md);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-text-light);
+            font-family: var(--font-family-display);
+            font-size: var(--font-size-h3);
+            text-transform: none;
+            padding: 0.6rem 2.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-dark);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-primary-dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-secondary-light);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-facebook {
+            background-color: var(--color-social-fb);
+            color: var(--color-text-light);
+        }
+
+        /* Estruturas Visuais (Lifestyle Images) */
+        .visual-grid {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .lifestyle-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            border-radius: var(--border-radius-circle);
+            border: 6px solid var(--color-secondary);
+            box-shadow: var(--shadow-glow);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-primary-light);
+            transition: all 0.4s ease;
+        }
+
+        .lifestyle-container::before {
+            content: "Imagem Circular";
+            font-family: var(--font-family-display);
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.8);
+            z-index: 2;
+        }
+
+        .lifestyle-container:hover {
+            transform: scale(1.05) rotate(5deg);
+            border-color: var(--color-secondary-light);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+        }
+
+        .card-component {
+            background: linear-gradient(135deg, rgba(163, 204, 46, 0.9), rgba(130, 168, 24, 0.9));
+            padding: 2rem;
+            border-radius: var(--border-radius-card);
+            width: 300px;
+            color: var(--color-primary-dark);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card-component:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-component h3 {
+            font-family: var(--font-family-display);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar de Navegação -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <h1>Split Açaí</h1>
+            <p>Design System</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#colors" class="active">Colors</a></li>
+            <li><a href="#typography">Typography</a></li>
+            <li><a href="#buttons">Buttons & CTAs</a></li>
+            <li><a href="#visuals">Visual Elements</a></li>
+        </ul>
+    </aside>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+        
+        <!-- Seção: Colors -->
+        <section id="colors" class="ds-section">
+            <div class="ds-header">
+                <h2>Cores da Marca</h2>
+                <p>Paleta vibrante e energética que contrasta o roxo natural com o verde limão iluminado.</p>
+            </div>
+            
+            <div class="color-grid">
+                <!-- Roxo Principal -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-primary);"></div>
+                    <div class="color-info">
+                        <h4>Primary</h4>
+                        <p>#522b5d</p>
+                        <p>var(--color-primary)</p>
+                    </div>
+                </div>
+                <!-- Roxo Escuro -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-primary-dark);"></div>
+                    <div class="color-info">
+                        <h4>Primary Dark</h4>
+                        <p>#3a1c42</p>
+                        <p>var(--color-primary-dark)</p>
+                    </div>
+                </div>
+                <!-- Verde Limão -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-secondary);"></div>
+                    <div class="color-info" style="color: var(--color-text-dark)">
+                        <h4>Secondary</h4>
+                        <p>#a3cc2e</p>
+                        <p>var(--color-secondary)</p>
+                    </div>
+                </div>
+                <!-- Accent Vermelho -->
+                <div class="color-card">
+                    <div class="color-swatch" style="background-color: var(--color-accent);"></div>
+                    <div class="color-info">
+                        <h4>Accent CTA</h4>
+                        <p>#e63946</p>
+                        <p>var(--color-accent)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Tipografia -->
+        <section id="typography" class="ds-section">
+            <div class="ds-header">
+                <h2>Tipografia</h2>
+                <p>Uma mistura de fontes manuscritas fluídas com fontes arredondadas para facilidade de leitura.</p>
+            </div>
+
+            <div class="typography-card">
+                <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Display Font: Caveat (Weight: 700)</p>
+                <h1 class="type-display" style="font-size: var(--font-size-h1);">aqui tem Split Açaí</h1>
+                <h2 class="type-display" style="font-size: var(--font-size-h2);">Onde encontrar!</h2>
+            </div>
+
+            <div class="typography-card">
+                <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 0.5rem;">Body Font: Nunito (Weights: 400, 700, 900)</p>
+                <div class="type-body">
+                    <p style="font-size: var(--font-size-h3); font-weight: 900; margin-bottom: 1rem;">Texto em Destaque (Bold)</p>
+                    <p style="font-size: var(--font-size-body); font-weight: 400; max-width: 600px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Uma tipografia limpa e muito amigável.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Botões -->
+        <section id="buttons" class="ds-section">
+            <div class="ds-header">
+                <h2>Botões & CTAs</h2>
+                <p>Botões com micro-interações de elevação e brilho para atrair o clique.</p>
+            </div>
+
+            <div class="typography-card">
+                <div class="btn-grid">
+                    <button class="btn btn-primary">Saiba onde tem</button>
+                    <button class="btn btn-secondary">Sabores e Nutrição</button>
+                    <button class="btn btn-facebook">Facebook</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Elementos Visuais -->
+        <section id="visuals" class="ds-section">
+            <div class="ds-header">
+                <h2>Elementos Visuais & Sombras</h2>
+                <p>Containers com bordas acentuadas, recortes circulares e efeitos glassmorphism.</p>
+            </div>
+
+            <div class="visual-grid">
+                <!-- Foto Circular Mockup -->
+                <div class="lifestyle-container">
+                    <!-- img src="" alt="Lifestyle" seria colocada aqui -->
+                </div>
+
+                <!-- Green Card -->
+                <div class="card-component">
+                    <h3>Pote 150g</h3>
+                    <p style="font-weight: 700; margin-bottom: 1rem;">O verdadeiro sabor do açaí.</p>
+                    <button class="btn btn-primary" style="font-size: 1.2rem; padding: 0.4rem 1.5rem; width: 100%;">Pedir</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Smooth Scrolling e Active State Menu Simples
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href').substring(1);
+                document.getElementById(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

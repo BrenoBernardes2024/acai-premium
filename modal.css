@@ -1,0 +1,368 @@
+/* ========================================
+   AÇAÍ PREMIUM - Modal.css
+   Estilos do Modal de Cadastro
+   ======================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-container {
+    background: var(--white);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close:hover {
+    background: var(--red);
+    color: var(--white);
+    transform: rotate(90deg);
+}
+
+.modal-header {
+    text-align: center;
+    padding: 30px 30px 20px;
+    border-bottom: 1px solid var(--gray-200);
+    background: linear-gradient(135deg, var(--purple-acai), var(--purple-vibrant));
+    border-radius: 20px 20px 0 0;
+    color: var(--white);
+}
+
+.modal-header h3 {
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 8px;
+}
+
+.modal-header p {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+}
+
+.modal-tabs {
+    display: flex;
+    padding: 0 30px;
+    background: var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--gray-600);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.modal-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.modal-tab.active {
+    color: var(--purple-acai);
+}
+
+.modal-tab.active::after {
+    background: linear-gradient(90deg, var(--purple-acai), var(--purple-vibrant));
+}
+
+.modal-tab i {
+    margin-right: 8px;
+}
+
+.modal-form {
+    padding: 30px;
+}
+
+/* Product Info */
+.product-info {
+    background: linear-gradient(135deg, rgba(75, 0, 130, 0.1), rgba(139, 0, 255, 0.1));
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 2px solid var(--purple-acai);
+}
+
+.product-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--purple-acai), var(--purple-vibrant));
+    color: var(--white);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.product-badge i {
+    font-size: 1.1rem;
+}
+
+.product-details {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    line-height: 1.6;
+}
+
+.product-details span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Form Styles */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-row:has(.form-group:only-child) {
+    grid-template-columns: 1fr;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 8px;
+}
+
+.form-group label::after {
+    content: ' *';
+    color: var(--red);
+}
+
+.form-group input {
+    padding: 12px 16px;
+    border: 2px solid var(--gray-200);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--white);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--purple-acai);
+    box-shadow: 0 0 0 4px rgba(75, 0, 130, 0.1);
+}
+
+.form-group input.error {
+    border-color: var(--red);
+    background: rgba(220, 53, 69, 0.05);
+}
+
+.form-group input.valid {
+    border-color: var(--green);
+    background: rgba(40, 167, 69, 0.05);
+}
+
+.form-group input::placeholder {
+    color: var(--gray-400);
+}
+
+.error-message {
+    font-size: 0.8rem;
+    color: var(--red);
+    margin-top: 5px;
+    display: none;
+}
+
+.form-group.has-error .error-message {
+    display: block;
+}
+
+/* Loading State */
+.form-group.loading input {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.form-group.loading::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 45px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--gray-300);
+    border-top-color: var(--purple-acai);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Form Actions */
+.form-actions {
+    margin-top: 25px;
+}
+
+.form-actions .btn-primary {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+}
+
+.form-actions .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(75, 0, 130, 0.4);
+}
+
+/* Toggle Password Visibility */
+.form-group .toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 42px;
+    cursor: pointer;
+    color: var(--gray-500);
+    transition: color 0.3s ease;
+}
+
+.form-group .toggle-password:hover {
+    color: var(--purple-acai);
+}
+
+/* Success Animation */
+.modal-form.success {
+    text-align: center;
+    padding: 50px 30px;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--green), #20c997);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    animation: successPop 0.5s ease;
+}
+
+@keyframes successPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.success-icon i {
+    font-size: 2.5rem;
+    color: var(--white);
+}
+
+.modal-form.success h3 {
+    color: var(--gray-900);
+    margin-bottom: 10px;
+}
+
+.modal-form.success p {
+    color: var(--gray-600);
+}
+
+/* Scrollbar */
+.modal-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+    background: var(--gray-100);
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+    background: var(--purple-acai);
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-container {
+        max-height: 95vh;
+        margin: 10px;
+    }
+
+    .modal-header {
+        padding: 25px 20px 15px;
+    }
+
+    .modal-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .modal-tabs {
+        padding: 0 20px;
+    }
+
+    .modal-form {
+        padding: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+

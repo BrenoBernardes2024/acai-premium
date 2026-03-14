@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Split Açaí Premium - O Melhor da Cidade</title>
+    
+    <!-- Google Fonts import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./all.min.css">
+    
+    <!-- Scripts Originais e de Ícones (como FontAwesome) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" defer></script>
+
+    <style>
+        /* =========================================
+           SPLIT AÇAÍ DESIGN SYSTEM - TOKENS
+           ========================================= */
+        :root {
+            --color-primary-dark: #3a1c42;
+            --color-primary: #522b5d;
+            --color-primary-light: #7a4687;
+            
+            --color-secondary: #a3cc2e;
+            --color-secondary-light: #cde439;
+            --color-secondary-dark: #82a818;
+            
+            --color-accent: #e63946;
+            --color-accent-dark: #cc2531;
+            
+            --color-social-fb: #4267B2;
+            
+            --color-text-light: #ffffff;
+            --color-text-dark: #2d1a33;
+            --color-text-muted: rgba(255, 255, 255, 0.7);
+
+            --font-family-display: 'Caveat', cursive;
+            --font-family-body: 'Nunito', sans-serif;
+            
+            --border-radius-pill: 50px;
+            --border-radius-circle: 50%;
+            --border-radius-card: 16px;
+            
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 10px 15px rgba(0, 0, 0, 0.25);
+            --shadow-lg: 0 20px 30px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 25px rgba(163, 204, 46, 0.5);
+        }
+
+        /* Globals */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-family-body);
+            background-color: var(--color-primary-dark);
+            color: var(--color-text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 100% 0%, var(--color-primary) 0%, var(--color-primary-dark) 80%);
+        }
+
+        h1, h2, h3, .font-display { font-family: var(--font-family-display); }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.8rem 2rem; font-family: var(--font-family-body);
+            font-weight: 900; font-size: 1.1rem; border-radius: var(--border-radius-pill);
+            border: none; cursor: pointer; text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-md); text-transform: uppercase; letter-spacing: 1px; gap: 8px;
+        }
+        .btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-lg); }
+        .btn-primary { background-color: var(--color-accent); color: var(--color-text-light); }
+        .btn-primary:hover { background-color: var(--color-accent-dark); }
+        .btn-secondary { background-color: var(--color-secondary); color: var(--color-primary-dark); }
+        .btn-secondary:hover { background-color: var(--color-secondary-light); box-shadow: var(--shadow-glow); }
+
+        /* Typography Extras */
+        .section-title { font-size: 3.5rem; color: var(--color-secondary-light); text-shadow: var(--shadow-sm); margin-bottom: 0.5rem; text-align: center; }
+        .section-subtitle { font-size: 1.2rem; color: var(--color-text-muted); text-align: center; margin-bottom: 3rem; }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 5rem 0; }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(58, 28, 66, 0.85); backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 100; box-shadow: var(--shadow-sm);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .logo { font-family: var(--font-family-display); font-size: 2.2rem; color: var(--color-secondary); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo span { color: var(--color-text-light); }
+        .nav-links { display: flex; gap: 1.5rem; }
+        .nav-links a { color: var(--color-text-light); text-decoration: none; font-weight: 700; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--color-secondary); }
+        .nav-actions { display: flex; gap: 1rem; align-items: center; }
+        .cart-btn { background: none; border: none; color: var(--color-text-light); font-size: 1.2rem; cursor: pointer; position: relative; }
+        .cart-count { background: var(--color-accent); color: white; border-radius: 50%; padding: 0.1rem 0.4rem; font-size: 0.8rem; position: absolute; top: -10px; right: -10px; font-weight: bold;}
+
+        /* Hero */
+        .hero { position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding-top: 80px; }
+        .hero-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.8; } /* Canvas em 0.8 de opacidade para mostrar bem as imagens */
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent, var(--color-primary-dark)); z-index: -1; opacity: 0.7; }
+        .hero-title { font-size: 5.5rem; line-height: 1; margin-bottom: 1rem; }
+        .hero-title span { color: var(--color-secondary); }
+        .hero-subtitle { font-size: 1.5rem; max-width: 600px; margin: 0 auto 2.5rem; color: var(--color-text-muted); }
+        .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; }
+
+        /* Cardápio (Menu Grid) */
+        .menu-filters { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; flex-wrap: wrap; }
+        .filter-btn { background: rgba(255,255,255,0.1); border: none; color: white; padding: 0.5rem 1.5rem; border-radius: var(--border-radius-pill); cursor: pointer; font-family: var(--font-family-body); font-weight: 700; transition: all 0.3s; }
+        .filter-btn.active, .filter-btn:hover { background: var(--color-secondary); color: var(--color-primary-dark); }
+        
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem; }
+        .menu-item { background: rgba(255,255,255,0.05); border-radius: var(--border-radius-card); overflow: hidden; border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s; display: flex; flex-direction: column; }
+        .menu-item:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg), var(--shadow-glow); border-color: var(--color-secondary-light); }
+        .menu-item-image { height: 220px; overflow: hidden; position: relative; border-bottom: 4px solid var(--color-secondary); }
+        .menu-item-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .menu-item:hover .menu-item-image img { transform: scale(1.1); }
+        .menu-item-badge { position: absolute; top: 1rem; right: 1rem; background: var(--color-accent); color: white; padding: 0.3rem 0.8rem; border-radius: var(--border-radius-pill); font-weight: bold; font-size: 0.8rem; }
+        .menu-item-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .menu-item-title { font-size: 1.8rem; color: var(--color-secondary-light); margin-bottom: 0.5rem; }
+        .menu-item-description { color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; flex: 1; }
+        .menu-item-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .menu-item-price { font-size: 1.4rem; font-weight: 900; color: white; }
+        .menu-item-btn { background: var(--color-accent); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+        .menu-item-btn:hover { background: var(--color-accent-dark); transform: scale(1.1); }
+
+        /* Configurador (Simplified adapted style) */
+        .configurator-wrapper { background: rgba(255,255,255,0.03); border-radius: var(--border-radius-card); padding: 2rem; border: 1px solid rgba(255,255,255,0.05); }
+        .option-group { margin-bottom: 2rem; }
+        .option-title { font-size: 1.4rem; color: var(--color-secondary); margin-bottom: 1rem; display: flex; justify-content: space-between; }
+        .size-options, .flavor-options, .coating-options { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .size-btn, .flavor-btn, .coating-btn { background: rgba(255,255,255,0.1); border: 2px solid transparent; color: white; padding: 0.8rem 1.5rem; border-radius: var(--border-radius-pill); cursor: pointer; transition: all 0.3s; font-family: var(--font-family-body); font-weight: 700; }
+        .size-btn.active, .flavor-btn.active, .coating-btn.active,
+        .size-btn:hover, .flavor-btn:hover, .coating-btn:hover { background: rgba(163, 204, 46, 0.2); border-color: var(--color-secondary); color: var(--color-secondary-light); }
+        .configurator-summary { background: var(--color-primary); padding: 1.5rem; border-radius: var(--border-radius-card); margin-top: 2rem; border: 1px solid var(--color-primary-light); }
+        .summary-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+        .price-value { font-size: 1.8rem; font-weight: 900; color: var(--color-secondary-light); }
+        .btn-add-cart { width: 100%; margin-top: 1rem; }
+
+        /* Galeria */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+        .gallery-item { position: relative; border-radius: var(--border-radius-circle); overflow: hidden; aspect-ratio: 1/1; border: 6px solid var(--color-secondary); transition: all 0.4s; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+        .gallery-overlay { position: absolute; inset: 0; background: rgba(82, 43, 93, 0.7); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; font-size: 4rem; color: var(--color-secondary); }
+        .gallery-item:hover { transform: scale(1.05); border-color: var(--color-secondary-light); box-shadow: var(--shadow-glow); }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* Depoimentos */
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .testimonial-card { background: rgba(255,255,255,0.05); padding: 2rem; border-radius: var(--border-radius-card); position: relative; border-top: 4px solid var(--color-secondary); }
+        .testimonial-stars { color: #ffd700; margin-bottom: 1rem; }
+        .testimonial-text { font-style: italic; color: var(--color-text-muted); margin-bottom: 1.5rem; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .author-avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--color-secondary); color: var(--color-primary-dark); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+        .author-info h4 { color: white; }
+        .author-info span { font-size: 0.85rem; color: var(--color-text-muted); }
+
+        /* Sobre */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        @media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+        .about-image { position: relative; border-radius: var(--border-radius-circle); padding: 1rem; background: var(--color-secondary); }
+        .about-image img { width: 100%; border-radius: var(--border-radius-circle); display: block; }
+        .feature-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-weight: bold; color: var(--color-secondary-light); }
+        .feature-item i { font-size: 1.5rem; }
+
+        /* Footer */
+        .footer { background: #26112d; padding: 4rem 0 2rem; border-top: 5px solid var(--color-secondary); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem; }
+        .footer-brand p { color: var(--color-text-muted); margin: 1rem 0; }
+        .social-links a { display: inline-flex; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; align-items: center; justify-content: center; color: white; margin-right: 0.5rem; transition: background 0.3s; }
+        .social-links a:hover { background: var(--color-secondary); color: var(--color-primary-dark); }
+        .footer-links h4 { font-family: var(--font-family-display); font-size: 1.8rem; color: var(--color-secondary); margin-bottom: 1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.5rem; }
+        .footer-links a { color: var(--color-text-muted); text-decoration: none; transition: color 0.3s; }
+        .footer-links a:hover { color: white; }
+        .newsletter-form { display: flex; margin-top: 1rem; }
+        .newsletter-form input { flex: 1; padding: 0.8rem; border: none; border-radius: var(--border-radius-pill) 0 0 var(--border-radius-pill); outline: none; }
+        .newsletter-form button { background: var(--color-accent); color: white; border: none; padding: 0 1.5rem; border-radius: 0 var(--border-radius-pill) var(--border-radius-pill) 0; cursor: pointer; }
+        .footer-bottom { text-align: center; color: var(--color-text-muted); padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-ice-cream"></i>
+                <span>Açaí Premium</span>
+            </a>
+            <div class="nav-links">
+                <a href="#cardapio">Cardápio</a>
+                <a href="#montar">Montar Açaí</a>
+                <a href="#galeria">Galeria</a>
+                <a href="#depoimentos">Depoimentos</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#contato">Contato</a>
+            </div>
+            <div class="nav-actions">
+                <button class="cart-btn" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <a href="#" class="btn btn-primary" style="padding: 0.4rem 1.5rem; font-size: 0.9rem;">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <!-- Mantemos o canvas original do site, em um site real o JS iria injetar algo aqui -->
+        <canvas id="hero-canvas" class="hero-video"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content" style="z-index: 1;">
+            <h1 class="hero-title">Açaí <span>Premium</span></h1>
+            <p class="hero-subtitle">O açaí mais saboroso da cidade, fresquinho e feito com carinho para você</p>
+            <div class="hero-buttons">
+                <a href="#montar" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Fazer Pedido
+                </a>
+                <a href="#cardapio" class="btn btn-secondary">
+                    <i class="fas fa-utensils"></i> Ver Cardápio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cardápio Section -->
+    <section id="cardapio">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nosso <span>Cardápio</span></h2>
+                <p class="section-subtitle">Deliciosas opções de açaí para todos os gostos</p>
+            </div>
+            
+            <div class="menu-filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">Copos</button>
+                <button class="filter-btn">Combos</button>
+                <button class="filter-btn">Bowls</button>
+                <button class="filter-btn">Zero Açúcar</button>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Item 1 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="./a5cc6bc77c5d554e80620d77271a94c0.jpg" alt="Açaí 300ml" onerror="this.src='https://images.unsplash.com/photo-1556379092-dca659792591?w=500&h=500&fit=crop'">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title">Açaí 300ml</h3>
+                        <p class="menu-item-description">Porção individual perfeita para matar a fome</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">R$ 12,00</span>
+                            <button class="menu-item-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="./3a0a9a5fd33e7885cc4a1d505ae41818.jpg" alt="Açaí 700ml" onerror="this.src='https://images.unsplash.com/photo-1590196726264-90a612df2313?w=500&h=500&fit=crop'">
+                        <span class="menu-item-badge">Mais Vendido</span>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title">Açaí 700ml</h3>
+                        <p class="menu-item-description">Para quem quer muito açaí e coberturas</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">R$ 25,00</span>
+                            <button class="menu-item-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="./757f9567e0a94b9726a4c8edfee025b0.jpg" alt="Açaí Zero" onerror="this.src='https://images.unsplash.com/photo-1556379092-dca659792591?w=500&h=500&fit=crop'">
+                        <span class="menu-item-badge" style="background:#8B00FF;">Zero Açúcar</span>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title">Açaí Zero 500ml</h3>
+                        <p class="menu-item-description">Açaí sem açúcar adicionado com bananas</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">R$ 20,00</span>
+                            <button class="menu-item-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="./cca38f4b12db664c250bf25a3112b2c2.jpg" alt="Combo Açaí" onerror="this.src='https://images.unsplash.com/photo-1556379092-dca659792591?w=500&h=500&fit=crop'">
+                        <span class="menu-item-badge">Combo</span>
+                    </div>
+                    <div class="menu-item-content">
+                        <h3 class="menu-item-title">Combo Açaí</h3>
+                        <p class="menu-item-description">Açaí 500ml + 1 grátis + bônus de cobertura</p>
+                        <div class="menu-item-footer">
+                            <span class="menu-item-price">R$ 22,00</span>
+                            <button class="menu-item-btn"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Configurador Section -->
+    <section id="montar" style="background: rgba(0,0,0,0.2);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Monte Seu <span>Açaí</span></h2>
+                <p class="section-subtitle">Personalize do seu jeito, do tamanho às coberturas</p>
+            </div>
+
+            <div class="configurator-wrapper">
+                <div class="configurator-options">
+                    <!-- Tamanhos -->
+                    <div class="option-group">
+                        <h4 class="option-title">Escolha o Tamanho</h4>
+                        <div class="size-options">
+                            <button class="size-btn active">300ml (R$ 12,00)</button>
+                            <button class="size-btn">500ml (R$ 18,00)</button>
+                            <button class="size-btn">700ml (R$ 25,00)</button>
+                        </div>
+                    </div>
+                    <!-- Sabores -->
+                    <div class="option-group">
+                        <h4 class="option-title">Escolha o Sabor</h4>
+                        <div class="flavor-options">
+                            <button class="flavor-btn active"><i class="fas fa-ice-cream"></i> Tradicional</button>
+                            <button class="flavor-btn"><i class="fas fa-leaf"></i> Guaraná</button>
+                            <button class="flavor-btn"><i class="fas fa-bolt"></i> Zero</button>
+                        </div>
+                    </div>
+                    <!-- Frutas -->
+                    <div class="option-group">
+                        <h4 class="option-title"><i class="fas fa-apple-alt"></i> Frutas <span>0/3</span></h4>
+                        <div class="coating-options">
+                            <button class="coating-btn"><i class="fas fa-lemon"></i> Banana</button>
+                            <button class="coating-btn"><i class="fas fa-heart"></i> Morango</button>
+                            <button class="coating-btn"><i class="fas fa-leaf"></i> Kiwi</button>
+                            <button class="coating-btn"><i class="fas fa-lemon"></i> Abacaxi</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumo -->
+                <div class="configurator-summary">
+                    <div class="summary-header">
+                        <h3>Seu Açaí</h3>
+                        <div class="price-value">R$ 12,00</div>
+                    </div>
+                    <p><strong>Tamanho:</strong> 300ml</p>
+                    <p style="margin-bottom: 1rem;"><strong>Sabor:</strong> Tradicional</p>
+                    <button class="btn btn-primary btn-add-cart">
+                        <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria Section -->
+    <section id="galeria">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nossa <span>Galeria</span></h2>
+                <p class="section-subtitle">Algumas fotos dos nossos açaís mais pedidos</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="./photo-1563805042-7684c019e1cb" onerror="this.src='https://images.unsplash.com/photo-1556379092-dca659792591?w=500&h=500&fit=crop'" alt="Galeria"><div class="gallery-overlay"><i class="fas fa-camera"></i></div></div>
+                <div class="gallery-item"><img src="./b3e0a5678eccd90997a85adb6bbcbbfc.jpg" onerror="this.src='https://images.unsplash.com/photo-1590196726264-90a612df2313?w=500&h=500&fit=crop'" alt="Galeria"><div class="gallery-overlay"><i class="fas fa-heart"></i></div></div>
+                <div class="gallery-item"><img src="./c64de099c26da30db2ef3d52676650da.jpg" onerror="this.src='https://images.unsplash.com/photo-1556379092-dca659792591?w=500&h=500&fit=crop'" alt="Galeria"><div class="gallery-overlay"><i class="fas fa-ice-cream"></i></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos Section -->
+    <section id="depoimentos" style="background: rgba(0,0,0,0.2);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">O que dizem <span>Clientes</span></h2>
+                <p class="section-subtitle">A satisfação é nosso maior prêmio</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"O melhor açaí que já provei! A cobertura de Nutella é divina e o atendimento é excelente!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info"><h4>Mariana Silva</h4><span>Cliente fiel há 2 anos</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Adoro montar meu próprio açaí! O configurador é super fácil de usar e sempre fica perfeito."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">J</div>
+                        <div class="author-info"><h4>João Pedro</h4><span>Cliente há 1 ano</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <h2 class="section-title" style="text-align: left;">Sobre o <span>Açaí</span></h2>
+                    <p style="margin-bottom: 1rem; color: var(--color-text-muted);">
+                        Há mais de 10 anos, levamos o melhor açaí da região até você. Tudo começa com a seleção rigorosa dos melhores frutos, 
+                        processados de forma artesanal.
+                    </p>
+                    <div class="feature-item"><i class="fas fa-leaf"></i> 100% Natural</div>
+                    <div class="feature-item"><i class="fas fa-heart"></i> Feito com Amor</div>
+                    <div class="feature-item"><i class="fas fa-award"></i> Qualidade Premium</div>
+                    <br>
+                    <a href="#" class="btn btn-secondary">Saiba Mais</a>
+                </div>
+                <div class="about-image">
+                    <img src="./photo-1563805042-7684c019e1cb(1)" onerror="this.src='https://images.unsplash.com/photo-1590196726264-90a612df2313?w=500&h=500&fit=crop'" alt="Sobre">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo" style="margin-bottom:1rem;">
+                        <i class="fas fa-ice-cream"></i><span>Açaí Premium</span>
+                    </a>
+                    <p>O melhor açaí da cidade, feito com carinho.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#cardapio">Cardápio</a></li>
+                        <li><a href="#montar">Montar</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Newsletter</h4>
+                    <p style="color:var(--color-text-muted); font-size: 0.9rem;">Receba promoções exclusivas!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="E-mail">
+                        <button type="button"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Split Açaí Premium. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scrollytelling Animation Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const canvas = document.getElementById("hero-canvas");
+        const context = canvas.getContext("2d");
+
+        // Set canvas to full screen
+        const resizeCanvas = () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            render();
+        };
+
+        const frameCount = 75; // Total frames
+        const currentFrame = index => {
+            // Converts 0 to "000", 1 to "001", etc.
+            const paddedIndex = index.toString().padStart(3, '0');
+            return `./hero_frames/frame_${paddedIndex}_delay-0.041s.jpg`;
+        };
+
+        const images = [];
+        const imageSeq = { frame: 0 };
+
+        // Preload Images
+        for (let i = 0; i < frameCount; i++) {
+            const img = new Image();
+            img.src = currentFrame(i);
+            images.push(img);
+        }
+
+        // Render first frame when loaded
+        images[0].onload = () => {
+            resizeCanvas();
+        };
+
+        // Draw Image Covering the Canvas (like object-fit: cover)
+        function render() {
+            const img = images[imageSeq.frame];
+            if (!img || img.width === 0) return;
+
+            const hRatio = canvas.width / img.width;
+            const vRatio = canvas.height / img.height;
+            const ratio  = Math.max(hRatio, vRatio);
+            
+            const centerShift_x = (canvas.width - img.width * ratio) / 2;
+            const centerShift_y = (canvas.height - img.height * ratio) / 2;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, 0, 0, img.width, img.height,
+                              centerShift_x, centerShift_y, img.width * ratio, img.height * ratio);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+
+        // GSAP ScrollTrigger timeline (identical length to index.html original logic)
+        const heroTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "+=500%", // Extends scroll by 500% of viewport height
+                pin: true,     // Pins the hero so it stays fixed while scrolling
+                pinSpacing: true,
+                scrub: 0.5,    // Smooth interpolation
+            }
+        });
+
+        // 1. Fade out the text and buttons early
+        heroTl.to(".hero-content", {
+            opacity: 0,
+            y: -50,
+            duration: 0.2
+        }, 0);
+
+        // 2. Animate the canvas frames over the entire scroll length
+        heroTl.to(imageSeq, {
+            frame: frameCount - 1,
+            snap: "frame",
+            ease: "none",
+            onUpdate: render,
+            duration: 1
+        }, 0);
+    </script>
+</body>
+</html>
