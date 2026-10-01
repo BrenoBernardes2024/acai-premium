@@ -197,7 +197,7 @@ button:disabled {
   background: #69802c;
   box-shadow: 0 0 0 3px #d7f65b66;
 }
-.hero h1 {
+.hero .hero-title {
   font-family: var(--display);
   font-weight: 700;
   font-size: clamp(66px, 6.6vw, 106px);
@@ -1262,7 +1262,7 @@ dialog::backdrop {
   .hero-copy {
     padding-top: 85px;
   }
-  .hero h1 {
+  .hero .hero-title {
     font-size: 115px;
   }
   .stage-label {
@@ -1286,7 +1286,7 @@ dialog::backdrop {
     min-height: 590px;
     grid-template-columns: 45% 55%;
   }
-  .hero h1 {
+  .hero .hero-title {
     font-size: 74px;
   }
   .hero-copy {
@@ -1391,7 +1391,7 @@ dialog::backdrop {
   .hero-copy .eyebrow {
     font-size: 8px;
   }
-  .hero h1 {
+  .hero .hero-title {
     font-size: clamp(65px, 15vw, 100px);
     margin: 25px 0 21px;
     letter-spacing: -0.5px;
@@ -1660,7 +1660,7 @@ dialog::backdrop {
   .announcement {
     font-size: 6px;
   }
-  .hero h1 {
+  .hero .hero-title {
     font-size: 58px;
   }
   .hero-signature {

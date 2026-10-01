@@ -10,8 +10,9 @@
     />
     <title>KICK — BRENO 10. Feita para mudar o jogo.</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./kick.css" />
-    <script type="module" src="./kick.js"></script>
+    <link rel="stylesheet" href="./kick.css?v=motion-1" />
+    <link rel="stylesheet" href="./cinematic-hero.css?v=motion-1" />
+    <script type="module" src="./kick.js?v=motion-1"></script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -66,15 +67,165 @@
       ><a href="#breno">Universo Breno</a>
     </nav>
     <main id="conteudo">
-      <section class="hero" aria-labelledby="hero-title">
+      <section
+        class="kick-film"
+        id="experiencia"
+        aria-labelledby="film-title"
+        data-progress="0"
+        data-phase="ready"
+      >
+        <div class="film-sticky">
+          <div class="film-grid" aria-hidden="true"></div>
+          <div class="film-ghost" aria-hidden="true">KICK</div>
+          <div
+            id="film-scene"
+            class="film-scene"
+            role="img"
+            aria-label="Jogador digital Breno, com a camisa 10, preparando um chute. Role a página para acompanhar a jogada."
+          ></div>
+          <svg class="film-poster" viewBox="0 0 600 700" aria-hidden="true">
+            <ellipse cx="320" cy="605" rx="170" ry="25" fill="#070c07" />
+            <path
+              d="m296 332-50 113 62 118m42-223 45 121 99 6"
+              fill="none"
+              stroke="#718569"
+              stroke-width="43"
+              stroke-linecap="round"
+            />
+            <path
+              d="m282 220-80 66-70-25m226-33 70 45 45-47"
+              fill="none"
+              stroke="#718569"
+              stroke-width="32"
+              stroke-linecap="round"
+            />
+            <path
+              d="m281 194 63-6 37 149-100 13-25-114Z"
+              fill="#252e23"
+              stroke="#cfe97a"
+              stroke-width="3"
+            />
+            <path
+              d="m286 323 21 64m47-59 8 66"
+              stroke="#20281d"
+              stroke-width="55"
+            />
+            <ellipse cx="310" cy="159" rx="34" ry="45" fill="#718569" />
+            <path d="M277 156q-8-59 37-47 38 3 34 43l-33-14Z" fill="#171e15" />
+            <text
+              x="309"
+              y="287"
+              fill="#d7f65b"
+              font-size="58"
+              font-family="Arial"
+              font-weight="bold"
+              text-anchor="middle"
+            >
+              10
+            </text>
+            <path d="m293 551 22 5 26 34-60 4Z" fill="#d7f65b" />
+            <path d="m480 444 14 10 10 45-39-18Z" fill="#d7f65b" />
+            <circle cx="505" cy="514" r="38" fill="#e9edde" />
+            <path d="m505 486 22 16-8 25h-27l-9-25Z" fill="#263320" />
+          </svg>
+          <div class="film-vignette" aria-hidden="true"></div>
+          <div class="film-grain" aria-hidden="true"></div>
+          <div class="film-topline">
+            <span
+              ><span class="live-dot"></span> BRENO 10 / SIGNATURE MOTION</span
+            ><span class="film-edition">UM NOVO JEITO DE ENTRAR EM CAMPO.</span>
+          </div>
+          <div class="film-copy">
+            <div class="eyebrow">FUTEBOL É INSTINTO. O RESTO É HISTÓRIA.</div>
+            <h1 id="film-title">SOLTE<br />O <i>INSTINTO.</i></h1>
+            <p>
+              <span class="film-claim"
+                >A próxima jogada não cabe em uma tela.</span
+              ><br />
+              Ela começa em você.
+            </p>
+            <a class="button button-light film-explore" href="#produto"
+              >EXPLORE A BRENO 10
+              <svg
+                class="arrow-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 19 19 5M5 5h14v14" /></svg
+            ></a>
+          </div>
+          <div class="film-impact-copy" aria-hidden="true">
+            <span>O TALENTO É SEU.</span
+            ><strong>SEM<br /><i>LIMITES.</i></strong>
+          </div>
+          <div class="film-outro">
+            <span class="eyebrow">YOUR GAME. YOUR SIGNATURE.</span>
+            <h2>AGORA,<br />É COM <i>VOCÊ.</i></h2>
+            <a class="button button-light" href="#produto"
+              >CONHEÇA SUA PRÓXIMA CHUTEIRA
+              <svg
+                class="arrow-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 19 19 5M5 5h14v14" /></svg
+            ></a>
+          </div>
+          <div class="film-flash" aria-hidden="true"></div>
+          <div class="film-loading" id="film-loading">
+            <span></span> PREPARANDO A JOGADA
+          </div>
+          <div class="film-bottomline">
+            <button
+              class="film-scroll-cue"
+              id="film-play"
+              aria-label="Reproduzir o chute rolando a página"
+            >
+              <span class="scroll-stem" aria-hidden="true"></span
+              ><span id="film-cue-label">ROLE PARA DAR O CHUTE</span>
+            </button>
+            <div class="film-timeline">
+              <span id="film-phase">01 / PREPARAÇÃO</span>
+              <div class="film-progress" aria-hidden="true"><span></span></div>
+              <span id="film-percentage">00%</span>
+            </div>
+            <button
+              class="film-motion-toggle"
+              id="film-motion"
+              aria-label="Pausar animação da hero"
+              aria-pressed="true"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <path d="M9 6v12M15 6v12" />
+              </svg>
+            </button>
+          </div>
+          <span class="film-side-note" aria-hidden="true"
+            >KICK® — NO LIMITS / EST. 2026</span
+          >
+        </div>
+      </section>
+      <section class="hero" id="produto" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="eyebrow">
             <span class="live-dot"></span> NOVA TEMPORADA / BRENO 10
           </div>
-          <h1 id="hero-title">
+          <h2 id="hero-title" class="hero-title">
             NASCIDA<br />PARA <span class="italic-word">MUDAR</span><br />O
             JOGO<span class="title-period">.</span>
-          </h1>
+          </h2>
           <p>
             O instinto de quem joga diferente.<br />Uma chuteira para deixar a
             sua marca.

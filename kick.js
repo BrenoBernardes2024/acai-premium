@@ -1,5 +1,6 @@
 import * as THREE from "./vendor/three.module.js";
 import { createBoot, setBootColor } from "./boot-model.js";
+import { initCinematicHero } from "./cinematic-hero.js";
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
@@ -304,6 +305,8 @@ try {
   $("#view-reset").disabled = true;
   $(".drag-hint").textContent = "VISUALIZAÇÃO DO PRODUTO";
 }
+
+initCinematicHero();
 
 const techDetails = {
   upper: {
