@@ -50,6 +50,8 @@ class CinematicHeroTests(unittest.TestCase):
         page.wait_for_function(
             "document.querySelector('#experiencia').matches('.film-ready,.film-unavailable')"
         )
+        if not reduced and "film-ready" in page.locator("#experiencia").get_attribute("class"):
+            page.wait_for_function("Number(document.querySelector('#experiencia').dataset.framesLoaded)>=7")
         return page
 
     def scroll(self, page, progress):
@@ -64,7 +66,7 @@ class CinematicHeroTests(unittest.TestCase):
             progress,
         )
         page.wait_for_function(
-            "(p)=>Math.abs(Number(document.querySelector('#experiencia').dataset.progress)-p)<.012",
+            "(p)=>Math.abs(Number(document.querySelector('#experiencia').dataset.progress)-p)<.0006",
             arg=progress,
         )
 
@@ -74,32 +76,36 @@ class CinematicHeroTests(unittest.TestCase):
             target.mkdir(parents=True, exist_ok=True)
             page.screenshot(path=str(target / f"{name}.png"))
 
-    def test_scroll_choreography_depth_and_reversal(self):
+    def test_complete_story_and_reversal(self):
         page = self.page()
         track = page.locator("#experiencia")
         self.assertIn("film-ready", track.get_attribute("class"))
-        self.assertEqual(track.get_attribute("data-phase"), "ready")
+        self.assertEqual(track.get_attribute("data-frames-loaded"), "8")
+        heights = track.evaluate("(e)=>({track:e.offsetHeight,sticky:e.querySelector('.film-sticky').offsetHeight})")
+        self.assertGreaterEqual(heights["track"] / heights["sticky"], 6)
         self.capture(page, "desktop-ready")
-        self.scroll(page, .26)
-        windup = page.locator("#film-scene canvas").screenshot()
-        self.scroll(page, .49)
-        self.assertEqual(track.get_attribute("data-phase"), "contact")
-        self.capture(page, "desktop-contact")
-        self.assertNotEqual(windup, page.locator("#film-scene canvas").screenshot())
-        self.scroll(page, .65)
-        far_depth = float(track.get_attribute("data-ball-depth"))
+        scene_images = []
+        for position, scene in [(0,"01"),(.14,"02"),(.29,"03"),(.42,"04"),(.59,"05"),(.70,"06"),(.83,"07"),(.94,"08")]:
+            self.scroll(page, position)
+            self.assertEqual(track.get_attribute("data-scene"), scene)
+            scene_images.append(page.locator(".film-photo-canvas").screenshot())
+        self.assertEqual(len(set(scene_images)), 8, "Every shot has its own visible image")
+        self.scroll(page, .515)
         self.assertEqual(track.get_attribute("data-phase"), "flight")
-        self.scroll(page, .85)
-        self.assertLess(float(track.get_attribute("data-ball-depth")), far_depth / 3)
-        self.capture(page, "desktop-ball-foreground")
+        self.assertTrue(page.locator(".film-ball-canvas").is_visible())
+        self.capture(page, "desktop-ball-pass")
+        self.scroll(page, .70)
+        self.assertEqual(track.get_attribute("data-phase"), "goal")
+        self.assertTrue(page.locator(".film-goal-copy").is_visible())
+        self.capture(page, "desktop-goal")
         self.scroll(page, .99)
         self.assertEqual(track.get_attribute("data-phase"), "finish")
         self.assertTrue(page.locator(".film-outro a").is_visible())
         self.assertTrue(page.locator(".film-copy").evaluate("(e)=>e.inert"))
-        self.capture(page, "desktop-finish")
-        self.scroll(page, .26)
+        self.capture(page, "desktop-close")
+        self.scroll(page, .14)
         self.assertEqual(track.get_attribute("data-phase"), "ready")
-        self.assertAlmostEqual(float(track.get_attribute("data-progress")), .26, delta=.012)
+        self.assertEqual(track.get_attribute("data-scene"), "02")
 
     def test_pause_resume_and_replay(self):
         page = self.page()
@@ -124,12 +130,15 @@ class CinematicHeroTests(unittest.TestCase):
         self.assertFalse(page.locator(".mobile-nav").evaluate("(e)=>e.hidden"))
         page.locator(".menu-toggle").click()
         self.capture(page, "mobile-ready")
-        self.scroll(page, .49)
+        self.scroll(page, .29)
         self.assertEqual(page.locator("#experiencia").get_attribute("data-phase"), "contact")
         self.capture(page, "mobile-contact")
-        self.scroll(page, .85)
-        self.assertLess(float(page.locator("#experiencia").get_attribute("data-ball-depth")), 1.1)
-        self.capture(page, "mobile-ball-foreground")
+        self.scroll(page, .70)
+        self.assertEqual(page.locator("#experiencia").get_attribute("data-phase"), "goal")
+        self.capture(page, "mobile-goal")
+        self.scroll(page, .99)
+        self.assertEqual(page.locator("#experiencia").get_attribute("data-scene"), "08")
+        self.capture(page, "mobile-close")
         self.assertLessEqual(page.evaluate("document.documentElement.scrollWidth"), 390)
 
     def test_small_mobile_layout(self):
@@ -142,13 +151,13 @@ class CinematicHeroTests(unittest.TestCase):
 
     def test_viewport_resize_repaints_scene(self):
         page = self.page()
-        before = page.locator("#film-scene canvas").screenshot()
+        before = page.locator(".film-photo-canvas").screenshot()
         page.set_viewport_size({"width": 390, "height": 844})
         page.wait_for_timeout(400)
-        after = page.locator("#film-scene canvas").screenshot()
+        after = page.locator(".film-photo-canvas").screenshot()
         self.assertNotEqual(before, after)
-        self.assertEqual(page.locator("#film-scene canvas").evaluate("(e)=>e.getBoundingClientRect().width"), 390)
-        self.scroll(page, .65)
+        self.assertEqual(page.locator(".film-photo-canvas").evaluate("(e)=>e.getBoundingClientRect().width"), 390)
+        self.scroll(page, .45)
         self.assertEqual(page.locator("#experiencia").get_attribute("data-phase"), "flight")
 
     def test_reduced_motion_removes_extra_scroll(self):
@@ -176,17 +185,73 @@ class CinematicHeroTests(unittest.TestCase):
         browser = self.playwright.chromium.launch(executable_path=CHROME, headless=True, args=["--no-sandbox", "--disable-webgl"])
         try:
             page = self.page(browser=browser)
-            self.assertIn("film-unavailable", page.locator("#experiencia").get_attribute("class"))
-            self.assertTrue(page.locator(".film-poster").is_visible())
-            self.assertTrue(page.locator("#film-motion").is_disabled())
+            self.assertIn("film-ready", page.locator("#experiencia").get_attribute("class"))
+            self.assertEqual(page.locator(".film-ball-canvas").count(), 0)
+            self.scroll(page, .70)
+            self.assertEqual(page.locator("#experiencia").get_attribute("data-phase"), "goal")
+            self.scroll(page, .99)
+            self.assertEqual(page.locator("#experiencia").get_attribute("data-scene"), "08")
             self.capture(page, "fallback")
-            page.locator("#film-play").click()
+            page.locator(".film-outro a").click()
             page.locator('[data-product="flare"]').click()
             self.assertIn("FLARE", page.locator("#dialog-name").inner_text())
             page.context.close()
             self.contexts.remove(page.context)
         finally:
             browser.close()
+
+    def test_missing_frame_preserves_story_and_navigation(self):
+        context = self.browser.new_context(viewport={"width":1440,"height":900})
+        self.contexts.append(context)
+        page = context.new_page()
+        page.on("pageerror", lambda error: self.errors.append(str(error)))
+        page.route("**/05-goal.webp", lambda route: route.abort())
+        page.goto(BASE_URL, wait_until="networkidle")
+        page.wait_for_function("document.querySelector('#experiencia').dataset.framesLoaded==='7'")
+        self.assertEqual(page.locator("#experiencia").get_attribute("data-frames-failed"), "1")
+        self.scroll(page, .70)
+        self.assertEqual(page.locator("#experiencia").get_attribute("data-scene"), "06")
+        self.scroll(page, .99)
+        page.locator(".film-outro a").click()
+        self.assertTrue(page.locator("#hero-title").is_visible())
+
+    def test_live_motion_preference_and_context_loss(self):
+        page = self.page()
+        self.scroll(page, .515)
+        page.locator(".film-ball-canvas").evaluate("e=>e.dispatchEvent(new Event('webglcontextlost',{cancelable:true}))")
+        self.scroll(page, .70)
+        self.assertEqual(page.locator("#experiencia").get_attribute("data-phase"), "goal")
+        self.assertFalse(page.locator(".film-ball-canvas").is_visible())
+        page.emulate_media(reduced_motion="reduce")
+        page.wait_for_function("document.querySelector('#experiencia').classList.contains('is-static')")
+        self.assertTrue(page.locator("#film-motion").is_disabled())
+        page.emulate_media(reduced_motion="no-preference")
+        page.wait_for_function("!document.querySelector('#experiencia').classList.contains('is-static')")
+        self.scroll(page, .99)
+        self.assertTrue(page.locator(".film-outro a").is_visible())
+
+
+    def test_static_photo_without_javascript(self):
+        context = self.browser.new_context(viewport={"width":390,"height":844}, java_script_enabled=False)
+        self.contexts.append(context)
+        page = context.new_page()
+        page.goto(BASE_URL, wait_until="networkidle")
+        self.assertTrue(page.locator("#film-still").is_visible())
+        self.assertTrue(page.locator("#film-still").evaluate("e=>e.complete && e.naturalWidth>0"))
+        heights = page.locator("#experiencia").evaluate("e=>({track:e.offsetHeight,sticky:e.querySelector('.film-sticky').offsetHeight})")
+        self.assertEqual(heights["track"], heights["sticky"])
+        page.locator(".film-explore").click()
+        self.assertTrue(page.locator("#hero-title").is_visible())
+
+    def test_enabling_motion_after_reduced_initial_load(self):
+        page = self.page(reduced=True)
+        self.assertEqual(page.locator("#experiencia").get_attribute("data-frames-loaded"), "1")
+        self.assertEqual(page.locator(".film-ball-canvas").count(), 0)
+        page.emulate_media(reduced_motion="no-preference")
+        page.wait_for_function("document.querySelector('#experiencia').dataset.framesLoaded==='8'")
+        self.scroll(page, .515)
+        self.assertTrue(page.locator(".film-ball-canvas").is_visible())
+
 
 
 if __name__ == "__main__":

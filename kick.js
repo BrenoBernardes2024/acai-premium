@@ -1,6 +1,6 @@
 import * as THREE from "./vendor/three.module.js";
 import { createBoot, setBootColor } from "./boot-model.js";
-import { initCinematicHero } from "./cinematic-hero.js";
+import { initCinematicHero } from "./cinematic-hero.js?v=film-2";
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];

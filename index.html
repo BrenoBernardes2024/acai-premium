@@ -9,10 +9,16 @@
       content="KICK — BRENO 10. Uma nova visão de futebol. Explore a chuteira em 3D e encontre a sua combinação."
     />
     <title>KICK — BRENO 10. Feita para mudar o jogo.</title>
+    <link
+      rel="preload"
+      as="image"
+      href="./assets/film/01-preparation.webp"
+      fetchpriority="high"
+    />
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="./kick.css?v=motion-1" />
-    <link rel="stylesheet" href="./cinematic-hero.css?v=motion-1" />
-    <script type="module" src="./kick.js?v=motion-1"></script>
+    <link rel="stylesheet" href="./kick.css?v=film-2" />
+    <link rel="stylesheet" href="./cinematic-hero.css?v=film-2" />
+    <script type="module" src="./kick.js?v=film-2"></script>
   </head>
   <body>
     <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -81,59 +87,24 @@
             id="film-scene"
             class="film-scene"
             role="img"
-            aria-label="Jogador digital Breno, com a camisa 10, preparando um chute. Role a página para acompanhar a jogada."
+            aria-label="Jogador realista da KICK, com a camisa 10, preparando um chute. Role a página para acompanhar a jogada."
           ></div>
-          <svg class="film-poster" viewBox="0 0 600 700" aria-hidden="true">
-            <ellipse cx="320" cy="605" rx="170" ry="25" fill="#070c07" />
-            <path
-              d="m296 332-50 113 62 118m42-223 45 121 99 6"
-              fill="none"
-              stroke="#718569"
-              stroke-width="43"
-              stroke-linecap="round"
-            />
-            <path
-              d="m282 220-80 66-70-25m226-33 70 45 45-47"
-              fill="none"
-              stroke="#718569"
-              stroke-width="32"
-              stroke-linecap="round"
-            />
-            <path
-              d="m281 194 63-6 37 149-100 13-25-114Z"
-              fill="#252e23"
-              stroke="#cfe97a"
-              stroke-width="3"
-            />
-            <path
-              d="m286 323 21 64m47-59 8 66"
-              stroke="#20281d"
-              stroke-width="55"
-            />
-            <ellipse cx="310" cy="159" rx="34" ry="45" fill="#718569" />
-            <path d="M277 156q-8-59 37-47 38 3 34 43l-33-14Z" fill="#171e15" />
-            <text
-              x="309"
-              y="287"
-              fill="#d7f65b"
-              font-size="58"
-              font-family="Arial"
-              font-weight="bold"
-              text-anchor="middle"
-            >
-              10
-            </text>
-            <path d="m293 551 22 5 26 34-60 4Z" fill="#d7f65b" />
-            <path d="m480 444 14 10 10 45-39-18Z" fill="#d7f65b" />
-            <circle cx="505" cy="514" r="38" fill="#e9edde" />
-            <path d="m505 486 22 16-8 25h-27l-9-25Z" fill="#263320" />
-          </svg>
+          <img
+            id="film-still"
+            class="film-still"
+            src="./assets/film/01-preparation.webp"
+            alt="Jogador da KICK com uniforme preto e chuteira verde elétrico, pronto para chutar em um estádio à noite."
+            width="1672"
+            height="941"
+            fetchpriority="high"
+          />
           <div class="film-vignette" aria-hidden="true"></div>
           <div class="film-grain" aria-hidden="true"></div>
           <div class="film-topline">
             <span
-              ><span class="live-dot"></span> BRENO 10 / SIGNATURE MOTION</span
-            ><span class="film-edition">UM NOVO JEITO DE ENTRAR EM CAMPO.</span>
+              ><span class="live-dot"></span> BRENO 10 / THE SIGNATURE
+              FILM</span
+            ><span class="film-edition">DO INSTINTO À ASSINATURA.</span>
           </div>
           <div class="film-copy">
             <div class="eyebrow">FUTEBOL É INSTINTO. O RESTO É HISTÓRIA.</div>
@@ -161,11 +132,17 @@
             <span>O TALENTO É SEU.</span
             ><strong>SEM<br /><i>LIMITES.</i></strong>
           </div>
+          <div class="film-goal-copy" aria-hidden="true">
+            <span class="eyebrow">O MOMENTO QUE MUDA TUDO.</span>
+            <strong>É <i>GOL.</i></strong>
+            <span class="film-goal-note">PRECISÃO. POTÊNCIA. INSTINTO.</span>
+          </div>
           <div class="film-outro">
-            <span class="eyebrow">YOUR GAME. YOUR SIGNATURE.</span>
-            <h2>AGORA,<br />É COM <i>VOCÊ.</i></h2>
+            <span class="eyebrow">UMA JOGADA. A SUA ASSINATURA.</span>
+            <h2>BRENO<br /><i>10.</i></h2>
+            <p class="film-product-note">VERDE ELÉTRICO. INSTINTO PURO.</p>
             <a class="button button-light" href="#produto"
-              >CONHEÇA SUA PRÓXIMA CHUTEIRA
+              >ENCONTRE SUA ASSINATURA
               <svg
                 class="arrow-icon"
                 viewBox="0 0 24 24"
@@ -188,10 +165,10 @@
               aria-label="Reproduzir o chute rolando a página"
             >
               <span class="scroll-stem" aria-hidden="true"></span
-              ><span id="film-cue-label">ROLE PARA DAR O CHUTE</span>
+              ><span id="film-cue-label">ROLE PARA VIVER A JOGADA</span>
             </button>
             <div class="film-timeline">
-              <span id="film-phase">01 / PREPARAÇÃO</span>
+              <span id="film-phase">01 / INSTINTO</span>
               <div class="film-progress" aria-hidden="true"><span></span></div>
               <span id="film-percentage">00%</span>
             </div>
@@ -572,7 +549,7 @@
           ></a>
           <div class="breno-signoff">
             <span class="signature">Breno</span
-            ><span>YOUR GAME. YOUR SIGNATURE.</span>
+            ><span>UMA JOGADA. A SUA ASSINATURA.</span>
           </div>
         </div>
       </section>
